@@ -1,0 +1,35 @@
+name: AWS
+
+on:
+push:
+branches:
+-main
+
+jobs:
+build-and-deploy:
+runs-on: ubuntu-latest
+steps:
+-name: checkout
+uses: actions/checkout@v1
+
+-name: configure Aws Credentials
+uses: AWS actions/configure-aws-credentials@v1
+
+with:
+aws-access-key-id: ${{ secrets. AWS_ACCESS_KEY_ID }}
+aws-secret-access-key: ${{ secrets. AWS_SECRET-ACCESS-KEY }}
+aws-region: us-east-1
+
+-name: deploy static site to S3 Bucket
+run: aws se sync . s3://devops-ahmad --delete
+
+
+
+
+
+
+
+
+
+
+
